@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "141959990767",
+    "project_id": "news-app-8d173",
+    "storage_bucket": "news-app-8d173.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141959990767:android:2782fed667703b16f03a1a",
+        "android_client_info": {
+          "package_name": "com.anas.org.news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141959990767-796o4n0f477kj6fc67vak5o3l2l89gb8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOD2-cJ_KPn7Bv9GgW-7TM0935WvaRyUs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141959990767-796o4n0f477kj6fc67vak5o3l2l89gb8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
