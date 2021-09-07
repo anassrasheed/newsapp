@@ -17,7 +17,7 @@ class AccountCheck extends StatelessWidget {
           login ? "Don't have an Account?" : "Already have an Account?",
           style: TextStyle(
             fontSize: 16,
-            color: defaultTextColor.withOpacity(0.7),
+            color: Constants.defaultTextColor.withOpacity(0.7),
           ),
         ),
         GestureDetector(
@@ -27,7 +27,7 @@ class AccountCheck extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: defaultTextColor.withOpacity(0.7),
+              color: Constants.defaultTextColor.withOpacity(0.7),
             ),
           ),
         ),

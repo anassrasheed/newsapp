@@ -13,9 +13,9 @@ class RoundedButton extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Padding(
-        padding: const EdgeInsets.only(top: appPadding,bottom: appPadding /2),
+        padding:  EdgeInsets.only(top: Constants.appPadding,bottom: Constants.appPadding /2),
         child: Container(
-          padding: EdgeInsets.all(appPadding / 2),
+          padding: EdgeInsets.all(Constants.appPadding / 2),
           width: 65,
           height: 65,
           decoration: BoxDecoration(
@@ -24,8 +24,8 @@ class RoundedButton extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    darkPrimary,
-                    lightPrimary,
+                    Constants.darkPrimary,
+                    Constants.lightPrimary,
                   ]
               ),
               boxShadow: [
@@ -33,13 +33,13 @@ class RoundedButton extends StatelessWidget {
                   offset: Offset(3,3),
                   spreadRadius: 1,
                   blurRadius: 4,
-                  color: darkShadow,
+                  color: Constants.darkShadow,
                 ),
                 BoxShadow(
                   offset: Offset(-5,-5),
                   spreadRadius: 1,
                   blurRadius: 4,
-                  color: lightShadow,
+                  color: Constants.lightShadow,
                 ),
               ]
           ),

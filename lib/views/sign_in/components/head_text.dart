@@ -9,9 +9,9 @@ class HeadText extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: appPadding,
-        vertical: appPadding / 2,
+      padding:  EdgeInsets.symmetric(
+        horizontal: Constants.appPadding,
+        vertical: Constants.appPadding / 2,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,13 +20,13 @@ class HeadText extends StatelessWidget {
           Text('Welcome',style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w600,
-              color: defaultTextColor
+              color: Constants.defaultTextColor
 
           ),),
           Text('SIGN IN',style: TextStyle(
             fontSize: 36,
             fontWeight: FontWeight.bold,
-            color: defaultTextColor
+            color: Constants.defaultTextColor
           ),),
         ],
       ),

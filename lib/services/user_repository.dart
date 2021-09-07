@@ -1,16 +1,14 @@
 // import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:flutter/services.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:news/models/user.dart';
+import 'package:news/services/auth_service.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 import 'exceptions/sign_in_out_exception.dart';
 
 class UserRepository implements IAuth<User?, UserParam> {
   final firebase.FirebaseAuth _firebaseAuth = firebase.FirebaseAuth.instance;
-
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
   Future<User?> signUp(UserParam? param) {
@@ -30,10 +28,6 @@ class UserRepository implements IAuth<User?, UserParam> {
     switch (param!.signIn) {
       case SignIn.anonymously:
         return _signInAnonymously();
-      case SignIn.withApple:
-        return _signInWithApple();
-      case SignIn.withGoogle:
-        return _signInWithGoogle();
       case SignIn.withEmailAndPassword:
         return _signInWithEmailAndPassword(
           param.email!,
@@ -47,17 +41,12 @@ class UserRepository implements IAuth<User?, UserParam> {
 
   @override
   Future<void> signOut(UserParam? param) async {
-    final GoogleSignIn googleSignIn = GoogleSignIn();
-    await googleSignIn.signOut();
     return _firebaseAuth.signOut();
   }
 
-  User? _fromFireBaseUserToUser(firebase.User? user) {
-    if (user == null) {
-      return null;
-    }
+  User _fromFireBaseUserToUser(firebase.User? user) {
     return User(
-      uid: user.uid,
+      uid: user!.uid,
       email: user.email,
       displayName: user.displayName,
       photoUrl: user.photoURL,
@@ -65,8 +54,11 @@ class UserRepository implements IAuth<User?, UserParam> {
   }
 
   Future<User?> currentUser() async {
+    print('entered');
     final firebase.User? firebaseUser = _firebaseAuth.currentUser;
-    return _fromFireBaseUserToUser(firebaseUser);
+    var user = _fromFireBaseUserToUser(firebaseUser);
+    await DatabaseAuthService().addUserData(user);
+    return user;
   }
 
   Future<User?> _signInAnonymously() async {
@@ -87,81 +79,6 @@ class UserRepository implements IAuth<User?, UserParam> {
     }
   }
 
-  Future<User?> _signInWithGoogle() async {
-    GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-
-    if (googleUser == null) {
-      throw SignInException(
-        title: 'Google sign in',
-        code: '',
-        message: 'Sign in with google is aborted',
-      );
-    }
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-
-    final firebase.AuthCredential credential =
-        firebase.GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    try {
-      final firebase.UserCredential authResult =
-          (await _firebaseAuth.signInWithCredential(credential));
-      return _fromFireBaseUserToUser(authResult.user);
-    } catch (e) {
-      if (e is PlatformException) {
-        throw SignInException(
-          title: 'Sign in with google',
-          code: e.code,
-          message: e.message,
-        );
-      } else {
-        rethrow;
-      }
-    }
-  }
-
-  Future<User?> _signInWithApple() async {
-    // final AuthorizationResult result = await AppleSignIn.performRequests([
-    //   AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
-    // ]);
-
-    // switch (result.status) {
-    //   case AuthorizationStatus.authorized:
-    //     final appleIdCredential = result.credential;
-    //     final oAuthProvider = firebase.OAuthProvider('apple.com');
-    //     final credential = oAuthProvider.credential(
-    //       idToken: String.fromCharCodes(appleIdCredential.identityToken),
-    //       accessToken:
-    //           String.fromCharCodes(appleIdCredential.authorizationCode),
-    //     );
-
-    //     final authResult = await _firebaseAuth.signInWithCredential(credential);
-    //     final firebaseUser = authResult.user;
-
-    //     final displayName =
-    //         '${appleIdCredential.fullName.givenName} ${appleIdCredential.fullName.familyName}';
-
-    //     await firebaseUser?.updateProfile(displayName: displayName);
-    //     return _fromFireBaseUserToUser(firebaseUser);
-
-    //   case AuthorizationStatus.error:
-    //     throw SignInException(
-    //       title: 'Sing in with apple',
-    //       code: result.error.code.toString(),
-    //       message: result.error.localizedDescription,
-    //     );
-    //   case AuthorizationStatus.cancelled:
-    //     throw SignInException(
-    //       title: 'Sing in with apple',
-    //       code: '',
-    //       message: 'Sign in cancelled',
-    //     );
-    // }
-    return null;
-  }
 
   Future<User?> _signInWithEmailAndPassword(
     String email,

@@ -16,8 +16,8 @@ class SignInScreen extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            lightPrimary,
-            darkPrimary,
+            Constants.lightPrimary,
+            Constants.darkPrimary,
           ]
         )
       ),
@@ -31,7 +31,6 @@ class SignInScreen extends StatelessWidget {
               Credentials(),
               Social(),
               SizedBox(height: 40,)
-
             ],
           ),
         ),

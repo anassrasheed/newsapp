@@ -11,14 +11,14 @@ class NeumorphicTextFieldContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(vertical: appPadding / 2),
+      margin: EdgeInsets.symmetric(vertical: Constants.appPadding / 2),
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: [
-                lightPrimary,
-                darkPrimary,
+                Constants.lightPrimary,
+                Constants.darkPrimary,
               ]
           ),
         borderRadius: BorderRadius.circular(12),
@@ -27,13 +27,13 @@ class NeumorphicTextFieldContainer extends StatelessWidget {
             offset: Offset(-2,-2),
             spreadRadius: 1,
             blurRadius: 4,
-            color: darkShadow,
+            color: Constants.darkShadow,
           ),
           BoxShadow(
             offset: Offset(2,2),
             spreadRadius: 1,
             blurRadius: 4,
-            color: lightShadow,
+            color: Constants.lightShadow,
           ),
         ]
       ),

@@ -15,11 +15,11 @@ class Social extends StatelessWidget {
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w400,
-            color: defaultTextColor.withOpacity(0.7),
+            color: Constants.defaultTextColor.withOpacity(0.7),
           ),
         ),
         SizedBox(
-          height: appPadding,
+          height: Constants.appPadding,
         ),
         AccountCheck(
           login: false,

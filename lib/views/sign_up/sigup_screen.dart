@@ -17,8 +17,8 @@ class SignUpScreen extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            lightPrimary,
-            darkPrimary,
+            Constants.lightPrimary,
+            Constants.darkPrimary,
           ]
         )
       ),

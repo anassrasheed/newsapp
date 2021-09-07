@@ -1,19 +1,20 @@
 class User {
-  final String uid;
+  final String? uid;
   final String? email;
   final String? displayName;
   final String? photoUrl;
+  final String? mobileNumber;
 
-  User({
-    required this.uid,
-    this.email,
-    this.displayName,
-    this.photoUrl,
-  });
+  User(
+      {this.uid,
+      this.email,
+      this.displayName,
+      this.photoUrl,
+      this.mobileNumber});
 
   @override
   String toString() {
-    return 'User(uid: $uid, email: $email, displayName: $displayName, photoUrl: $photoUrl)';
+    return 'User(uid: $uid, email: $email, displayName: $displayName, photoUrl: $photoUrl, phoneNumber : $mobileNumber)';
   }
 
   @override
@@ -24,7 +25,8 @@ class User {
         o.uid == uid &&
         o.email == email &&
         o.displayName == displayName &&
-        o.photoUrl == photoUrl;
+        o.photoUrl == photoUrl &&
+        o.mobileNumber == mobileNumber;
   }
 
   @override
@@ -32,7 +34,8 @@ class User {
     return uid.hashCode ^
         email.hashCode ^
         displayName.hashCode ^
-        photoUrl.hashCode;
+        photoUrl.hashCode ^
+        mobileNumber.hashCode;
   }
 }
 

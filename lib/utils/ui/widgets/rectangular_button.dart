@@ -5,7 +5,10 @@ class RectangularButton extends StatelessWidget {
   final String text;
   final VoidCallback press;
 
-  const RectangularButton({Key? key, required this.text, required this.press})
+  const RectangularButton(
+      {Key? key,
+      required this.text,
+      required this.press,})
       : super(key: key);
 
   @override
@@ -13,43 +16,43 @@ class RectangularButton extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Padding(
-        padding: const EdgeInsets.only(top: appPadding,bottom: appPadding /2),
+        padding: EdgeInsets.only(
+            top: Constants.appPadding, bottom: Constants.appPadding / 2),
         child: Container(
           width: double.infinity,
           height: 65,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12),
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    darkPrimary,
-                    lightPrimary,
-                  ]
-              ),
+                    Constants.darkPrimary,
+                    Constants.lightPrimary,
+                  ]),
               boxShadow: [
                 BoxShadow(
-                  offset: Offset(3,3),
+                  offset: Offset(3, 3),
                   spreadRadius: 1,
                   blurRadius: 4,
-                  color: darkShadow,
+                  color: Constants.darkShadow,
                 ),
                 BoxShadow(
-                  offset: Offset(-5,-5),
+                  offset: Offset(-5, -5),
                   spreadRadius: 1,
                   blurRadius: 4,
-                  color: lightShadow,
+                  color: Constants.lightShadow,
                 ),
-              ]
-          ),
+              ]),
           child: Center(
-            child: Text(text,style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w800,
-              color: defaultTextColor,
-
-
-            ),),
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w800,
+                color: Constants.defaultTextColor,
+              ),
+            ),
           ),
         ),
       ),

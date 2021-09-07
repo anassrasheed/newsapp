@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:news/models/user.dart';
 import 'package:news/services/exceptions/exception_handler.dart';
@@ -9,17 +10,18 @@ enum Env { dev, prod }
 Env currentEnv = Env.dev;
 
 final InjectedAuth<User?, UserParam> user = RM.injectAuth<User?, UserParam>(
-  () {
+      () {
+    initApp();
     return {
       Env.dev: () => UserRepository(
-          // exception: PasswordException('Invalid password'),
-          ),
+        // exception: PasswordException('Invalid password'),
+      ),
       Env.prod: () => UserRepository(),
     }[currentEnv]!();
   },
   onAuthStream: (repo) => (repo as UserRepository).currentUser().asStream(),
   onSetState: On.error(
-    (err, refresh) {
+        (err, refresh) {
       if (err is EmailException || err is PasswordException) {
         return;
       }
@@ -32,4 +34,9 @@ final InjectedAuth<User?, UserParam> user = RM.injectAuth<User?, UserParam>(
     },
   ),
 );
+
+void initApp(){
+  print('app Initialized');
+  Firebase.initializeApp();
+}
 
